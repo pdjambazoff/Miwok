@@ -7,7 +7,8 @@ package com.example.android.miwok;
 public class Word {
     private String englishWord;
     private String miwokWord;
-    private int image_resource_id;
+    private static final int NO_IMAGE_PROVIDED = -1;
+    private int image_resource_id = NO_IMAGE_PROVIDED;
 
     public Word(String e, String m) {
         miwokWord = m;
@@ -25,4 +26,10 @@ public class Word {
         return englishWord;
     }
     public int getImageRosourceID() { return image_resource_id;}
+    /**
+     * Returns whether or not there is an image for this word.
+     */
+    public boolean hasImage() {
+        return image_resource_id != NO_IMAGE_PROVIDED;
+    }
 }
