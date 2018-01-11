@@ -2,6 +2,7 @@ package com.example.android.miwok;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
     private int mColorResourceId;
+    private int mAudioId;
     public WordAdapter(Activity context, ArrayList<Word> wordList, int category_colors) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
@@ -74,12 +76,23 @@ public class WordAdapter extends ArrayAdapter<Word> {
         else {
             imgWord.setVisibility(View.GONE);
         }
+
+
         // Set the theme color for the list item
         View textContainer = listItemView.findViewById(R.id.text_container);
         // Find the color that the resource ID maps to
         int color = ContextCompat.getColor(getContext(), mColorResourceId);
         // Set the background color of the text container View
         textContainer.setBackgroundColor(color);
+
+        //Play Audio
+        final MediaPlayer player = MediaPlayer.create(getContext(), currentWords.getAudioRosourceID());
+        textContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                player.start();
+            }
+        });
 
 
         // Return the whole list item layout (containing 2 TextViews )
